@@ -44,7 +44,13 @@ jobs:
           libxxf86vm-dev
 
     - name: Build
-      run: ls -altrh | go build $(go list ./... | grep -v /internal/ | grep -v /examples/) | ls -altrh
+      run: |
+        pwd
+        ls -altrh
+        go list ./... | grep -v /internal/ | grep -v /examples/
+        go build $(go list ./... | grep -v /internal/ | grep -v /examples/)
+        echo "------"
+        ls -altrh
 
     - name: Upload build artifact
       uses: actions/upload-artifact@v4
