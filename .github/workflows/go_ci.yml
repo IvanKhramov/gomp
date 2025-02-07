@@ -48,7 +48,11 @@ jobs:
         pwd
         ls -altrh
         go list ./... | grep -v /internal/ | grep -v /examples/
+        du -sh *
+        echo "RUN BUILD"
         go build $(go list ./... | grep -v /internal/ | grep -v /examples/)
+        echo "END BUILD"
+        du -sh *
         echo "------"
         ls -altrh
 
