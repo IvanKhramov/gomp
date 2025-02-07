@@ -41,7 +41,10 @@ jobs:
           freeglut3-dev \
           libxcursor-dev \
           libxinerama-dev \
-          libxxf86vm-dev
+          libxxf86vm-dev \ 
+          libxkbcommon-dev \ 
+          libwayland-dev \
+          libxi-dev
 
     - name: Build
       run: |
@@ -85,7 +88,10 @@ jobs:
           freeglut3-dev \
           libxcursor-dev \
           libxinerama-dev \
-          libxxf86vm-dev
+          libxxf86vm-dev \ 
+          libxkbcommon-dev \ 
+          libwayland-dev \
+          libxi-dev
 
     - name: Set up Go ${{ inputs.go-version }}
       uses: actions/setup-go@v5
