@@ -72,8 +72,8 @@ jobs:
           freeglut3-dev \
           libxcursor-dev \
           libxinerama-dev \
-          libxxf86vm-dev \ 
-          libxkbcommon-dev \ 
+          libxxf86vm-dev \
+          libxkbcommon-dev \
           libwayland-dev \
           libxi-dev
     - name: Set up Go ${{ inputs.go-version }}
