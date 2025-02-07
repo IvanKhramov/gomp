@@ -53,7 +53,12 @@ jobs:
         go list ./... | grep -v /internal/ | grep -v /examples/
         du -sh *
         echo "RUN BUILD"
-        go build $(go list ./... | grep -v /internal/)
+        go build $(go list ./... | grep -v /internal/ | grep -v /examples/)
+        go build ./examples/ebiten-client-desktop .
+        go build ./pkg/ebiten-ecs/examples/gomp-server .
+        go build ./pkg/ebiten-ecs/examples/gomp-ebiten-client .
+        env GOOS=js GOARCH=wasm go build -o ./.dist/web-ebiten-client.wasm ./examples/web-ebiten-client-ws/main.go
+        cp $(go env GOROOT)/misc/wasm/wasm_exec.js ./.dist
         echo "END BUILD"
         du -sh *
         echo "------"
