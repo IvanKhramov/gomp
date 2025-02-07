@@ -50,7 +50,7 @@ jobs:
         go list ./... | grep -v /internal/ | grep -v /examples/
         du -sh *
         echo "RUN BUILD"
-        go build $(go list ./... | grep -v /internal/ | grep -v /examples/)
+        go build $(go list ./... | grep -v /internal/)
         echo "END BUILD"
         du -sh *
         echo "------"
