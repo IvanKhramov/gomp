@@ -118,9 +118,6 @@ jobs:
         with:
           go-version: ${{ inputs.go-version }}
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: ${{ inputs.os }}-${{ inputs.go-version }}-coverage
 
       - uses: fgrosse/go-coverage-report@v1.1.1 # Consider using a Git revision for maximum security
         with:
