@@ -41,34 +41,13 @@ jobs:
           freeglut3-dev \
           libxcursor-dev \
           libxinerama-dev \
-          libxxf86vm-dev \
-          libxkbcommon-dev \
+          libxxf86vm-dev \ 
+          libxkbcommon-dev \ 
           libwayland-dev \
           libxi-dev
-
     - name: Build
-      run: |
-        pwd
-        ls -altrh
-        go list ./... | grep -v /internal/ | grep -v /examples/
-        du -sh *
-        echo "RUN BUILD"
-        go build $(go list ./... | grep -v /internal/ | grep -v /examples/)
-        go build ./examples/ebiten-client-desktop .
-        go build ./pkg/ebiten-ecs/examples/gomp-server .
-        go build ./pkg/ebiten-ecs/examples/gomp-ebiten-client .
-        env GOOS=js GOARCH=wasm go build -o ./.dist/web-ebiten-client.wasm ./examples/web-ebiten-client-ws/main.go
-        cp $(go env GOROOT)/misc/wasm/wasm_exec.js ./.dist
-        echo "END BUILD"
-        du -sh *
-        echo "------"
-        ls -altrh
+      run: go build $(go list ./... | grep -v /internal/ | grep -v /examples/)
 
-    - name: Upload build artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ inputs.os }}-${{ inputs.go-version }}-build
-        path: .
 
   test:
     runs-on: ${{ inputs.os }}
@@ -97,7 +76,6 @@ jobs:
           libxkbcommon-dev \ 
           libwayland-dev \
           libxi-dev
-
     - name: Set up Go ${{ inputs.go-version }}
       uses: actions/setup-go@v5
       with:
@@ -139,7 +117,6 @@ jobs:
       - name: Install gocover-cobertura
         run: |
           go get github.com/boumenot/gocover-cobertura && go install github.com/boumenot/gocover-cobertura
-
       - name: Convert go coverage to corbetura format
         run: gocover-cobertura < coverage.txt > coverage.xml
 
